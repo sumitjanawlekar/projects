@@ -1,11 +1,27 @@
 package com.sumit.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Address {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int addressId;
+	
+	@Column
 	private String houseNumber;
+	@Column
 	private String street;
+	@Column
 	private String city;
+	@Column
 	private String country;
+	@Column
 	private String zipCode;
 	//Think if user also needs to associated here
 	

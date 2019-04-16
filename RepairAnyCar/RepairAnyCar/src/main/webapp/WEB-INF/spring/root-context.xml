@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow xmlns="http://www.springframework.org/schema/webflow"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-        https://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
-
-	<view-state id="start">
-	</view-state>
-
-<bean id = "customerDao" class = "com.sumit.dao.CustomerDAO" />
-</flow>
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<bean id= "multipartResolver" 
+	class = "org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
+	<bean id = "customerDao" class = "com.sumit.dao.CustomerDAO" />
+	<bean id = "customerValidation" class = "com.sumit.validation.CustomerValidation"/>
+</beans>

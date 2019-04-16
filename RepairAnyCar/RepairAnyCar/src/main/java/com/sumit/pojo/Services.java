@@ -3,18 +3,37 @@ package com.sumit.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.hibernate.annotations.NaturalId;
+
+@Entity
 public class Services {
 
+	@Id
+	@Column(name = "serviceId", unique = true, nullable = false, length = 50)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int serviceId;
+	
+	@Column
 	private String serviceName;
+	
+	@Column
 	private String serviceDescription;
-	private List<ServiceCenter> ServiceCenter = new ArrayList<ServiceCenter>();
 	
 	
-	public List<ServiceCenter> getServiceCenter() {
-		return ServiceCenter;
+	
+	
+	public int getServiceId() {
+		return serviceId;
 	}
-	public void setServiceCenter(List<ServiceCenter> serviceCenter) {
-		ServiceCenter = serviceCenter;
+	public void setServiceId(int serviceId) {
+		this.serviceId = serviceId;
+	
 	}
 	public String getServiceName() {
 		return serviceName;

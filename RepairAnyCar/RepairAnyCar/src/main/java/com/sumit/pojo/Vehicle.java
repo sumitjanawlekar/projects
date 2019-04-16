@@ -1,11 +1,34 @@
 package com.sumit.pojo;
 
-public abstract class Vehicle {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.NaturalId;
+
+@Entity
+public class Vehicle {
+
+	
+	@Column
 	private String company;
+	@Column
 	private String model;
+	
+	@Id
+	@NaturalId
+	@Column(name = "numberPate", unique = true, nullable = false, length = 100)
 	private String numberPlate;
+	
+	@Column
 	private String vechileType;
+	
+	@ManyToOne
+	@JoinColumn(name = "customerId")
 	private Customer customer;
 	
 	

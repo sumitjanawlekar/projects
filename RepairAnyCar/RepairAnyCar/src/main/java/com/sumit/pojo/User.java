@@ -1,13 +1,23 @@
 package com.sumit.pojo;
 
+import javax.persistence.Column;
+
+
 public abstract class User {
 
+	@Column
 	private String firstName;
+	@Column
 	private String lastName;
+	@Column
 	private String dateOfBirth;
+	@Column
 	private String emailAddress;
+	@Column
 	private String password;
+	@Column
 	private Address address;
+	@Column
 	private long phoneNumber;
 	
 	
