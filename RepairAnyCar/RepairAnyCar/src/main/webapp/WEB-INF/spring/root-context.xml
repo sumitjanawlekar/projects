@@ -10,4 +10,6 @@
 	
 	<bean id = "customerDao" class = "com.sumit.dao.CustomerDAO" />
 	<bean id = "customerValidation" class = "com.sumit.validation.CustomerValidation"/>
+	<bean id = "vehicleDao" class= "com.sumit.dao.VehicleDAO" />
+	<bean id = "serviceCenterDao" class="com.sumit.dao.ServiceCenterDAO"/>
 </beans>

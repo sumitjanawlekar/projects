@@ -6,10 +6,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -17,31 +20,43 @@ import javax.persistence.OneToOne;
 public class ServiceCenter {
 
 	@Id
-	@Column(name = "ServiceCenterId", unique = true, nullable = false, length = 50)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String ServiceCenterId;
 	
-	@OneToMany
-	@JoinColumn(name = "serviceId")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "ServiceCenter_Services", joinColumns = {@JoinColumn(name = "ServiceCenterId")}, inverseJoinColumns = {@JoinColumn(name = "serviceId")})
 	private List<Services> services ;
 	
-	@OneToMany
-	@JoinColumn(name = "emailAddress")
+	@OneToMany(mappedBy = "serviceCenter", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<Customer> customer;
 
 	@Column
 	private String serviceCenterName;
 
-	@OneToOne(cascade = {CascadeType.ALL})
+	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+	@JoinColumn(name = "addressId")
 	private Address address;
 	
+	
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+
+	public void setServiceCenterId(String serviceCenterId) {
+		this.ServiceCenterId = serviceCenterId;
+	}
+
+
 	public String getServiceCenterId() {
 		return ServiceCenterId;
 	}
 
-	public void setServiceCenterId(String serviceCenterId) {
-		ServiceCenterId = serviceCenterId;
-	}
 
 	public String getServiceCenterName() {
 		return serviceCenterName;
@@ -55,9 +70,6 @@ public class ServiceCenter {
 		return ServiceCenterId;
 	}
 
-	public void setServiceCenterCode(String serviceCenterCode) {
-		ServiceCenterId = serviceCenterCode;
-	}
 
 	public List<Customer> getCustomer() {
 		return customer;

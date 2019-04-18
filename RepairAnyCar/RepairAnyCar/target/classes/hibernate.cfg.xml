@@ -14,5 +14,8 @@
         
         <mapping class="com.sumit.pojo.Customer"/>
         <mapping class = "com.sumit.pojo.Vehicle"/>
+        <mapping class = "com.sumit.pojo.ServiceCenter"/>
+        <mapping class = "com.sumit.pojo.Address"/>
+        <mapping class = "com.sumit.pojo.Services"/>
     </session-factory>
 </hibernate-configuration>

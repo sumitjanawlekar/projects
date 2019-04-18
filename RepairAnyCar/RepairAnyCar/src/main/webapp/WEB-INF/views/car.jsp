@@ -10,11 +10,11 @@
 </head>
 <body>
 <div align="center">
-<h1>Customer Login</h1>
+<h1>Add Your Cars</h1>
 </div>
 
 <table>
-<form:form modelAttribute="customer">
+<form:form modelAttribute="vehicle">
 
 <tr>
 <td> Car Company</td>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Query;
 
 import com.sumit.pojo.Customer;
+import com.sumit.pojo.Vehicle;
 
 public class CustomerDAO extends DAO {
 
@@ -30,10 +31,6 @@ public class CustomerDAO extends DAO {
 			begin();
 			
 		Query query = getSession().createQuery(hql);
-//			query.setParameter("email", customer.getEmailAddress());
-//			query.setParameter("password", customer.getPassword());
-			//List cutomers= query.list();
-		//Query query = session.createQuery(hql);
 		query.setString("email", customer.getEmailAddress());
 		query.setString("pwd", customer.getPassword());
 		customer = (Customer)query.uniqueResult();
@@ -49,4 +46,26 @@ public class CustomerDAO extends DAO {
 		
 		return customer;
 	}
+	
+//	public void saveVehicle(Vehicle vehicle, Customer customer) {
+//		
+//		customerLogin(customer);
+//		try {
+//			begin();
+//			getSession().save(object)
+//		}
+//	}
+	
+//	public Customer get(Customer customer) {
+//		String hql = "from Customer as c where c.emailAddress =:emailAddress and c.password=: password";
+//		try {
+//			begin();
+//			Query query = getSession().createQuery(hql);
+//			query.setParameter("emailAddress", customer.getEmailAddress());
+//			query.setParameter("password", customer.getPassword());
+//			customer = (Customer)query.uniqueResult();
+//			
+//			customer.getVehicles().add(e);
+//		}
+//	}
 }

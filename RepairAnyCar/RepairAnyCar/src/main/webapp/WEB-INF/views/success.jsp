@@ -10,7 +10,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1></h1>
+
+	<h1> Welcome  ${customer.firstName}</h1>
 
 	<div align="right">
 		<a href="logout"><b> Logout</b></a>
@@ -19,18 +20,32 @@
 		<div align="right">
 		<a href="${pageContext.request.contextPath}/car/register"><b> Add Cars</b></a>
 	</div>
+	
+	<div align="center">
+	<form action="${pageContext.request.contextPath}/serviceCenter/list" method="get">
+	<h1> <i> <a >Search Service Centers </a></i></h1>
+	<input type="submit" value="Search">
+	</form>
+	</div>
+	
+	<div align="right">
+	<c:forEach  var="vehicles" items="${customer.vehicles}"> 
+	${vehicles.model}  <br>
+	</c:forEach>
+	
+	</div>
 
-	<div align="left">
+<%-- 	<div align="left">
 		Welcome <b style="color: red"> ${customer.getFirstName()} </b>
 		<c:out value="${customer.firstName}" />
 
-	</div>
+	</div> --%>
 
 	<div>
 		<table>
 			<tr>
 				<td>Customer name:</td>
-				<td>${customer.firstName}</td>
+				<td>${customer.firstName} ${customer.lastName} </td>
 			</tr>
 		</table>
 	</div>

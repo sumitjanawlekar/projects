@@ -76,6 +76,8 @@ public class CustomerController {
 			customer = customerDao.customerLogin(customer);
 			if(customer!=null) {
 				session.setAttribute("customer", customer);
+				session.setAttribute("customerId", customer.getCustomerId());
+				
 				return new ModelAndView("success","customer",customer);
 			}
 			else {

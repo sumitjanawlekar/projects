@@ -6,10 +6,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,26 +28,44 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	
-//	@OneToOne(cascade = {CascadeType.ALL})
-//	@JoinColumn(name = "addressId")
-//	private Address address;
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "addressId")
+	private Address address;
 	
 	
 	private String emailAddress;
 	
 	private String password;
 	
-	@OneToMany( mappedBy = "customer")
+	@OneToMany( mappedBy = "customer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Vehicle> vehicles;
-//	
-//	public Address getAddress() {
-//		return address;
-//	}
-//	public void setAddress(Address address) {
-//		this.address = address;
-//	}
+	
+	@ManyToOne
+	@JoinColumn(name = "ServiceCenterId")
+	private ServiceCenter serviceCenter;
+	
+	
+	public ServiceCenter getServiceCenter() {
+		return serviceCenter;
+	}
+	public void setServiceCenter(ServiceCenter serviceCenter) {
+		this.serviceCenter = serviceCenter;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
 	public List<Vehicle> getVehicles() {
 		return vehicles;
+	}
+	public int getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 	public void setVehicles(List<Vehicle> vehicles) {
 		this.vehicles = vehicles;
