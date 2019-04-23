@@ -31,9 +31,9 @@ public class IndexController {
 //		return "ServiceCenterSearch";
 //	}
 	
-	@RequestMapping(value = "/search" , method = RequestMethod.POST)
-	public String search() {
-		
-		return "ServiceCenterSearch";
-	}
+//	@RequestMapping(value = "/search" , method = RequestMethod.POST)
+//	public String search() {
+//		
+//		return "ServiceCenterSearch";
+//	}
 }

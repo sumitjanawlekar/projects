@@ -23,6 +23,7 @@ import com.sumit.validation.CustomerValidation;
 @RequestMapping("/customer")
 public class CustomerController {
 	
+	
 
 //	private CustomerValidation customerValidation;
 	
@@ -39,9 +40,9 @@ public class CustomerController {
 	
 
 	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public String viewForm(HttpServletRequest request, Model model, Customer customer, CustomerValidation customerValidation) {
+	public String viewForm(Model model, Customer customer) {
 		
-		model.addAttribute("customer", new Customer());
+		model.addAttribute("customer", customer);
 		return "register";
 	}
 	
@@ -93,7 +94,7 @@ public class CustomerController {
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(Model model, HttpSession session) {
 		
-		session.removeAttribute("customer");
+		session.invalidate();
 		return "redirect: login";
 		
 	}

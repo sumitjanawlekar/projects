@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import com.sumit.pojo.Booking;
 import com.sumit.pojo.ServiceCenter;
 
 public class ServiceCenterDAO extends DAO {
@@ -44,5 +45,34 @@ public class ServiceCenterDAO extends DAO {
 		}
 		
 		return serviceCenter;
+	}
+	
+	public void saveOrUpdate(ServiceCenter serviceCenter) {
+		
+		try {
+			begin();
+			getSession().saveOrUpdate(serviceCenter);
+			getSession().getTransaction().commit();
+			close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
+	}
+	
+	public void booking(Booking booking) {
+		try {
+			begin();
+			getSession().save(booking);
+			getSession().getTransaction().commit();
+			close();
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
 	}
 }

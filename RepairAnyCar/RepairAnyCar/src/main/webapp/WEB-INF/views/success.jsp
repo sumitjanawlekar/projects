@@ -14,7 +14,7 @@
 	<h1> Welcome  ${customer.firstName}</h1>
 
 	<div align="right">
-		<a href="logout"><b> Logout</b></a>
+		<a href="${pageContext.request.contextPath}/customer/logout"><b> Logout</b></a>
 	</div>
 	
 		<div align="right">

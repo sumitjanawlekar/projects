@@ -12,10 +12,11 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="hibernate.show_sql">true</property>
         
-        <mapping class="com.sumit.pojo.Customer"/>
+        <mapping class = "com.sumit.pojo.Customer"/>
         <mapping class = "com.sumit.pojo.Vehicle"/>
         <mapping class = "com.sumit.pojo.ServiceCenter"/>
         <mapping class = "com.sumit.pojo.Address"/>
         <mapping class = "com.sumit.pojo.Services"/>
+        <mapping class = "com.sumit.pojo.Booking"/>
     </session-factory>
 </hibernate-configuration>

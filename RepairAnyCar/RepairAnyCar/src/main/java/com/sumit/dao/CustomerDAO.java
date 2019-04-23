@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 
+import com.sumit.pojo.Booking;
 import com.sumit.pojo.Customer;
 import com.sumit.pojo.Vehicle;
 
@@ -47,6 +48,20 @@ public class CustomerDAO extends DAO {
 		return customer;
 	}
 	
+	public void saveAndUpdate(Customer customer) {
+		try {
+			begin();
+			getSession().saveOrUpdate(customer);
+			getSession().getTransaction().commit();
+			close();
+			
+		}
+		catch(Exception e) {
+			rollback();
+			close();
+		}
+	}
+	
 //	public void saveVehicle(Vehicle vehicle, Customer customer) {
 //		
 //		customerLogin(customer);
@@ -68,4 +83,6 @@ public class CustomerDAO extends DAO {
 //			customer.getVehicles().add(e);
 //		}
 //	}
+	
+
 }

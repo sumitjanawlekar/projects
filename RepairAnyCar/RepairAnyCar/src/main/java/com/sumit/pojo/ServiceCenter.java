@@ -13,8 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 public class ServiceCenter {
@@ -23,9 +28,11 @@ public class ServiceCenter {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String ServiceCenterId;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "ServiceCenter_Services", joinColumns = {@JoinColumn(name = "ServiceCenterId")}, inverseJoinColumns = {@JoinColumn(name = "serviceId")})
 	private List<Services> services ;
+
 	
 	@OneToMany(mappedBy = "serviceCenter", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private List<Customer> customer;
@@ -33,11 +40,26 @@ public class ServiceCenter {
 	@Column
 	private String serviceCenterName;
 
-	@OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "addressId")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private Address address;
 	
+	@OneToMany(mappedBy = "serviceCenter")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Booking> booking = new ArrayList<Booking>();
 	
+
+	public List<Booking> getBooking() {
+		return booking;
+	}
+
+
+	public void setBooking(List<Booking> booking) {
+		this.booking = booking;
+	}
+
+
 	public Address getAddress() {
 		return address;
 	}

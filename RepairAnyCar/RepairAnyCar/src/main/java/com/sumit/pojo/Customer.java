@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -27,6 +29,7 @@ public class Customer {
 	private int customerId;
 	private String firstName;
 	private String lastName;
+
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "addressId")
@@ -38,13 +41,23 @@ public class Customer {
 	private String password;
 	
 	@OneToMany( mappedBy = "customer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-	private List<Vehicle> vehicles;
+	private List<Vehicle> vehicles = new ArrayList<Vehicle>();
 	
 	@ManyToOne
 	@JoinColumn(name = "ServiceCenterId")
 	private ServiceCenter serviceCenter;
 	
+	@OneToMany (mappedBy = "customer")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Booking> booking = new ArrayList<Booking>();
 	
+	
+	public List<Booking> getBooking() {
+		return booking;
+	}
+	public void setBooking(List<Booking> booking) {
+		this.booking = booking;
+	}
 	public ServiceCenter getServiceCenter() {
 		return serviceCenter;
 	}
