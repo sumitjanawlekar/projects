@@ -17,7 +17,7 @@
 		<a href="${pageContext.request.contextPath}/customer/logout"><b> Logout</b></a>
 	</div>
 	
-		<div align="right">
+	<div align="right">
 		<a href="${pageContext.request.contextPath}/car/register"><b> Add Cars</b></a>
 	</div>
 	
