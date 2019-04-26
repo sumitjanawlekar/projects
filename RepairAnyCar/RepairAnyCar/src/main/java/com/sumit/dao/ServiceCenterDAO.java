@@ -107,4 +107,75 @@ public class ServiceCenterDAO extends DAO {
 		return serviceCenter;
 	}
 
+	public List<Booking> getBooking(int serviceCenterId) {
+
+		String hql = "from Booking as b where b.serviceCenter.ServiceCenterId=:serviceCenterId";
+		List<Booking> booking = null;
+
+		try {
+			begin();
+			Query query = getSession().createQuery(hql);
+			query.setParameter("serviceCenterId", serviceCenterId);
+			booking = (List<Booking>) query.list();
+			getSession().getTransaction().commit();
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
+		return booking;
+	}
+
+	public Booking getCustomerBooking(int bookingId) {
+		String hql = "from Booking as b where b.bookingId=:bookingId";
+		Booking booking = null;
+
+		try {
+			begin();
+			Query query = getSession().createQuery(hql);
+			query.setParameter("bookingId", bookingId);
+			booking = (Booking) query.uniqueResult();
+			getSession().getTransaction().commit();
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
+		return booking;
+	}
+
+	public void updateBooking(Booking booking) {
+
+		try {
+			begin();
+			getSession().saveOrUpdate(booking);
+			getSession().getTransaction().commit();
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
+	}
+
+	public void deleteServiceCenter(int serviceCenterId) {
+		String hql = "delete ServiceCenter where serviceCenterId=:serviceCenterId";
+
+		try {
+			begin();
+			Query query = getSession().createQuery(hql);
+			query.setParameter("serviceCenterId", serviceCenterId);
+			int result = query.executeUpdate();
+			System.out.println(result);
+			getSession().getTransaction().commit();
+			close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			rollback();
+			close();
+		}
+	}
+
 }

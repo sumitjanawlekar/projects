@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +24,9 @@ import com.sumit.pojo.ServiceCenter;
 @Controller
 @RequestMapping("/serviceCenter")
 public class ServiceCenterController {
+
+	String vehicleNumber;
+	String serviceCenterName;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String serviceCenter(@ModelAttribute("serviceCenter") ServiceCenter serviceCenter,
@@ -53,15 +60,14 @@ public class ServiceCenterController {
 	public String processForm(@ModelAttribute("booking") Booking booking, Customer customer, HttpSession session,
 			CustomerDAO customerDao, ServiceCenterDAO serviceCenterDao) {
 
-		// String mySelection = customer.getMySelection();
 		String appointmentDate = booking.getAppointmentTime();
-		// booking.getCustomer().getServiceCenter().setServiceCenterId(mySelection);
+
 		// get customer object from session
 		// get service center from session
 		Customer customerSession = ((Customer) session.getAttribute("customer"));
 		ServiceCenter serviceCenterSession = (ServiceCenter) session.getAttribute("serviceCenter");
-		// customerSession.setMySelection(mySelection);
 
+		booking.setStatus("Pending");
 		booking.setCustomer(customerSession);
 		booking.setServiceCenter(serviceCenterSession);
 		session.setAttribute("booking", booking);
@@ -69,8 +75,11 @@ public class ServiceCenterController {
 		serviceCenterSession.getBooking().add(booking);
 		customerSession.getBooking().add(booking);
 		booking.setStatus("Pending");
+
 		serviceCenterDao.booking(booking);
 
+		serviceCenterName = serviceCenterSession.getServiceCenterName();
+		vehicleNumber = booking.getVechileNumber();
 		customerDao.saveAndUpdate(customerSession);
 		serviceCenterDao.saveOrUpdate(serviceCenterSession);
 
@@ -79,8 +88,31 @@ public class ServiceCenterController {
 		session.setAttribute("customer", customerSession);
 		session.setAttribute("serviceCenter", serviceCenterSession);
 
-		// System.out.println(mySelection);
+		try {
+			sendEmail(customerSession);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		System.out.println(appointmentDate);
 		return "bookingSuccess";
 	}
+
+	private void sendEmail(Customer customer) throws EmailException {
+		String customerName = customer.getFirstName();
+		Email email = new SimpleEmail();
+		email.setHostName("smtp.googlemail.com");
+		email.setSmtpPort(465);
+
+		email.setAuthenticator(new DefaultAuthenticator("bscms2018@gmail.com", "password@12345"));
+		email.setSSLOnConnect(true);
+		email.setFrom("no-reply@msis.neu.edu");
+		email.setSubject("Test Mail");
+		email.setMsg(customerName + " Recieved Your Booking with " + serviceCenterName
+				+ " for your Car with vehicle number " + vehicleNumber);
+		email.addTo(customer.getEmailAddress());
+		email.send();
+
+	}
+
 }

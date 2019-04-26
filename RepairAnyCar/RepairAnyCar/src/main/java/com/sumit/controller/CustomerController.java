@@ -1,8 +1,14 @@
 package com.sumit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,7 +40,7 @@ public class CustomerController {
 //	
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String viewForm(Model model, Customer customer) {
+	public String viewForm(@ModelAttribute("customer") Customer customer, Model model, BindingResult br) {
 
 		model.addAttribute("customer", customer);
 		return "register";
@@ -42,15 +48,23 @@ public class CustomerController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String saveForm(@ModelAttribute("customer") Customer customer, CustomerDAO customerDao, BindingResult br,
-			HttpSession session, CustomerValidation customerValidation) {
+			HttpSession session, CustomerValidation customerValidation, Model model) throws Exception {
 
 		customerValidation.validate(customer, br);
 
 		if (br.hasErrors()) {
+
 			return "register";
 		} else {
 			customerDao.saveCustomer(customer);
 			session.setAttribute("customer", customer);
+
+			try {
+				sendEmail(customer);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 			return "success";
 		}
 
@@ -59,6 +73,7 @@ public class CustomerController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String viewLogin(HttpServletRequest request, Model model, Customer customer) {
 		model.addAttribute("customer", customer);
+
 		return "login";
 	}
 
@@ -70,6 +85,8 @@ public class CustomerController {
 		String password = customer.getPassword();
 
 		if (customer.getEmailAddress().equals("admin") && customer.getPassword().equals("admin")) {
+			List<ServiceCenter> serviceCenterList = (List<ServiceCenter>) serviceCenterDAO.serviceCenterList();
+			model.addAttribute("serviceCenterList", serviceCenterList);
 			return new ModelAndView("adminHome");
 		}
 
@@ -85,6 +102,7 @@ public class CustomerController {
 				return new ModelAndView("success", "customer", customer);
 			} else if (serviceCenter != null) {
 				session.setAttribute("serviceCenter", serviceCenter);
+				session.setAttribute("serviceCenterId", serviceCenter.getServiceCenterId());
 				return new ModelAndView("serviceCenterView", "serviceCenter", serviceCenter);
 			}
 
@@ -108,9 +126,24 @@ public class CustomerController {
 
 	// Used to redirect to success.jsp
 	@RequestMapping(value = "/success", method = RequestMethod.GET)
-	public String successView(Model model) {
+	public String successView(Model model, HttpSession session) {
 
 		model.addAttribute("success", new Customer());
 		return "success";
+	}
+
+	private void sendEmail(Customer customer) throws EmailException {
+		Email email = new SimpleEmail();
+		email.setHostName("smtp.googlemail.com");
+		email.setSmtpPort(465);
+
+		email.setAuthenticator(new DefaultAuthenticator("bscms2018@gmail.com", "password@12345"));
+		email.setSSLOnConnect(true);
+		email.setFrom("no-reply@msis.neu.edu");
+		email.setSubject("Test Mail");
+		email.setMsg(" Thankyou " + customer.getFirstName() + " for registering with Repair Any Car ");
+		email.addTo(customer.getEmailAddress());
+		email.send();
+
 	}
 }

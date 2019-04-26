@@ -10,7 +10,7 @@
 <body>
 	<div align="center">
 		<h2>
-			<i>Successfully Added ${serviceCenter.serviceCenterName}</i>
+			<i>Successfully added ${serviceCenter.serviceCenterName}</i>
 		</h2>
 	</div>
 	

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
     <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+    <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,8 @@
 
 <tr>
 <td> <a href="register"> Not a Customer? Register!!</a></td>
-</tr>
-
+</tr>  
+<font color="red">${failed}</font>
 </form:form>
 </table>
 </body>

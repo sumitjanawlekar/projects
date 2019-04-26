@@ -27,10 +27,22 @@
 	<input type="submit" value="Search">
 	</form>
 	</div>
+	<br>
+	<br>
+		<div align="center"> <h3><i>Your Bookings</i></h3>
+	<c:forEach  var="booking" items="${customer.booking}"> 
+	${booking.serviceCenter.serviceCenterName}  <br>
+	${booking.appointmentTime}  <br>
+	<font color="green"> ${booking.status} </font> <br>
+	${booking.vechileNumber}  <br>
+	<br>
+	<br>
+	</c:forEach>
+	</div>
 	
-	<div align="right">
+	<div align="right"> <h3><i>Your Vehicles</i></h3>
 	<c:forEach  var="vehicles" items="${customer.vehicles}"> 
-	${vehicles.model}  <br>
+	${vehicles.model}  (${vehicles.numberPlate})<br>
 	</c:forEach>
 	
 	</div>
@@ -49,6 +61,6 @@
 			</tr>
 		</table>
 	</div>
-	Success view
+
 </body>
 </html>

@@ -8,6 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-welcome ${sessionScope.serviceCenter.serviceCenterName}
+	<div align="center">
+		<h2>
+			<i>welcome ${sessionScope.serviceCenter.serviceCenterName}</i>
+		</h2>
+	</div>
+<a href="${pageContext.request.contextPath}/partner/dashboard"> Dashboard</a>
 </body>
 </html>
