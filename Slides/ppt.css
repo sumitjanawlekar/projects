@@ -1,0 +1,166 @@
+body{
+    background-color:white;
+}
+
+div{
+    resize: both;
+}
+
+textarea{
+    height: 50px;
+    width: 500px;
+    border: 2px solid black;
+    margin-left: 20%;
+    margin-top: 20%;
+    margin-bottom: 10%;
+    font-size: 30px;
+}
+
+#optionPanel{
+    width: 20%;
+    height: 550px;
+    border: 1px solid black;
+    float: left;
+    text-align: center;
+    background-color:rgb(255, 212, 0);
+    box-shadow: 5px 5px rgb(179, 176, 176);
+}
+
+#header{
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+    background-color:rgb(250, 250, 198);
+    font-size: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+#toolbar{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    
+}
+
+#main{
+    width: 98%;
+    height: 550px;
+    padding: 10px;
+  
+}
+
+#canvas{
+    width: 70%;
+    height: 550px;
+    border:  solid gray;
+    margin-right: 5%;
+    float: right;
+    position: relative;
+    box-shadow: 5px 5px rgb(179, 176, 176);
+}
+img{
+    height: 80px;
+    width: 80px;
+    float: left;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.buttonToolBar{
+    width: 80%;
+    margin-top: 10%;
+    height: 10%;
+    margin-bottom: 15%;
+    background-color: rgb(255, 166, 0); 
+    border-radius: 5px;  
+    font-size: 15px; 
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+p{
+    border-radius: 10px;
+    border: 1px solid black;
+    font-size: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.chooseToolBar{
+    float: left;
+    width: 70%;
+    height: 5%;
+    margin-left: 10%;
+    border: 0px;
+    padding: 5%;
+    background-color: rgb(255, 166, 0); 
+    border-radius: 5px;
+    margin-bottom: 5%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    
+}
+
+.insertToolBar{
+    width: 80%;
+    margin-top: 10%;
+    height: 10%;
+    margin-bottom: 10%;
+    background-color: rgb(255, 166, 0); 
+    border-radius: 5px;  
+    font-size: 15px; 
+    border: none;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+
+}
+
+.textAreaDiv{
+    width: 200px;
+    height: 200px;
+    font-size: 150%;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+
+  .textAreaDiv .textAreas{
+    width: 100%;
+    height: 100%;
+    border: 3px solid #4286f4;
+    box-sizing: border-box;
+  }
+
+  .textAreaDiv .textArea{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #4286f4;
+    position: absolute;
+
+
+  }
+
+  .textAreaDiv .textArea.TopLeft{
+    left: -5px;
+    top: -5px;
+    cursor: nwse-resize; 
+  }
+  .textAreaDiv .textArea.TopRight {
+    right: -5px;
+    top: -5px;
+    cursor: nesw-resize;
+  }
+  .textAreaDiv .textArea.BottomLeft {
+    left: -5px;
+    bottom: -5px;
+    cursor: nesw-resize;
+  }
+  .textAreaDiv .textArea.bottomright {
+    right: -5px;
+    bottom: -5px;
+    cursor: nwse-resize;
+  }

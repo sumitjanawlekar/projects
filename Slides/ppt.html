@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Power Point</title>
+ 
+   
+    <link rel="stylesheet" href="ppt.css">
+</head>
+
+<body>
+    <div id="header">
+        <img src="images/googleSlide.png">
+        Google Slides
+    </div>
+    <!-- <div id="toolbar">
+    </div> -->
+    <div id="main">
+        <div id="optionPanel">
+                <input type="button" class="buttonToolBar" value="Text" onclick="createText()"> 
+                <input type="file"  class="chooseToolBar" id="images" accept="image/png , image/jpeg" style="display : none" >
+                <label class="chooseToolBar" for="images"> Choose a File</label>
+                <input type="button" class="insertToolBar"  value="Insert" onclick="getFile()">
+        </div>
+        <div id="canvas">
+            <!-- <div class='resizable'>
+                <div class='resizers'>
+                  <div class='resizer top-left'></div>
+                  <div class='resizer top-right'></div>
+                  <div class='resizer bottom-left'></div>
+                  <div class='resizer bottom-right'></div>
+                </div> -->
+              </div>
+        </div>
+    </div>
+    <script src="./node_modules/ckeditor/ckeditor.js"></script>
+    <script src="./dist/bundle.js"></script>
+    
+    
+</body>
+
+</html>
