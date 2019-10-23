@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ckeditor": "^4.10.1"
+    "ckeditor": "^4.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.5",
